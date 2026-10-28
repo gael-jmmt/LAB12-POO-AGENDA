@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Contactos</title>
+</head>
+<body>
+    <h1>Agenda de Contactos</h1>
+    <a href="/nuevo">[+ Nuevo contacto]</a>
+
+    <div th:if="${contactos.isEmpty()}">
+        <p>No hay contactos guardados en la agenda.</p>
+    </div>
+
+    <table th:unless="${contactos.isEmpty()}" border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${contactos}">
+                <td th:text="${c.nombre}">-</td>
+                <td th:text="${c.apellido}">-</td>
+                <td th:text="${c.email}">-</td>
+                <td th:text="${c.telefono}">-</td>
+                <td>
+                    <a th:href="@{/editar/{id}(id=${c.id})}">Editar</a> | 
+                    <a th:href="@{/eliminar/{id}(id=${c.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
